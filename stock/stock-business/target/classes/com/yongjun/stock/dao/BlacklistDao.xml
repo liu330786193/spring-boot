@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.BlacklistDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.Blacklist" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="cust_name" property="custName" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platform, phone_no, cust_name, deleted
+  </sql>
+  <select id="selectByPhone" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_blacklist
+    where phone_no = #{phoneNo}
+  </select>
+</mapper>

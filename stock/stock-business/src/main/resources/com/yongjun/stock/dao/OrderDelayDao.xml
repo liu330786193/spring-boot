@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.OrderDelayDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.OrderDelay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="delay_date" property="delayDate" jdbcType="TIMESTAMP" />
+    <result column="delay_money" property="delayMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_id, delay_date, delay_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_delay
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order_delay
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yongjun.stock.entity.OrderDelay" >
+    insert into t_order_delay (id, order_id, delay_date, 
+      delay_money)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{delayDate,jdbcType=TIMESTAMP}, 
+      #{delayMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yongjun.stock.entity.OrderDelay" >
+    insert into t_order_delay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="delayDate != null" >
+        delay_date,
+      </if>
+      <if test="delayMoney != null" >
+        delay_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="delayDate != null" >
+        #{delayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delayMoney != null" >
+        #{delayMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yongjun.stock.entity.OrderDelay" >
+    update t_order_delay
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="delayDate != null" >
+        delay_date = #{delayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delayMoney != null" >
+        delay_money = #{delayMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yongjun.stock.entity.OrderDelay" >
+    update t_order_delay
+    set order_id = #{orderId,jdbcType=BIGINT},
+      delay_date = #{delayDate,jdbcType=TIMESTAMP},
+      delay_money = #{delayMoney,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

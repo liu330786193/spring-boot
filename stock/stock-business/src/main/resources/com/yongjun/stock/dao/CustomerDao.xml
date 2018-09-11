@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.CustomerDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.Customer" >
+    <id column="id" property="id" />
+    <result column="company_id" property="companyId" />
+    <result column="phone_no" property="phoneNo" />
+    <result column="password" property="password" />
+    <result column="trade_password" property="tradePassword" />
+    <result column="nickname" property="nickname" />
+    <result column="name" property="name" />
+    <result column="sex" property="sex" />
+    <result column="age" property="age" />
+    <result column="birthday" property="birthday" />
+    <result column="headimg_url" property="headimgUrl" />
+    <result column="card_number" property="cardNumber" />
+    <result column="status" property="status" />
+    <result column="reg_date" property="regDate" />
+    <result column="active_date" property="activeDate" />
+    <result column="authed_date" property="authedDate" />
+    <result column="last_login_time" property="lastLoginTime" />
+    <result column="device_id" property="deviceId" />
+    <result column="phone_model" property="phoneModel" />
+    <result column="is_black" property="isBlack" />
+    <result column="agent_id" property="agentId" />
+    <result column="sub_agent_id" property="subAgentId" />
+    <result column="money_total" property="moneyTotal" />
+    <result column="money_frozen" property="moneyFrozen" />
+    <result column="money_usable" property="moneyUsable" />
+    <result column="money_recharge" property="moneyRecharge" />
+    <result column="money_withdraw" property="moneyWithdraw" />
+    <result column="is_open" property="isOpen" />
+    <result column="notice_switch" property="noticeSwitch" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_id, phone_no, password, trade_password, nickname, name, sex, age, birthday,
+    headimg_url, card_number, status, reg_date, active_date, authed_date, last_login_time,
+    device_id, phone_model, is_black, agent_id, sub_agent_id, money_total, money_frozen,
+    money_usable, money_recharge, money_withdraw, is_open, notice_switch, create_time,
+    update_time
+  </sql>
+
+  <!-- 查找用户是否存在 -->
+  <select id="findCustomerLoginInfo" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      t_customer
+    WHERE phone_no = #{phoneNo}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from t_customer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findCustomerInfo" resultMap="BaseResultMap">
+    SELECT
+     *
+    FROM
+      t_customer
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yongjun.stock.entity.Customer">
+    SELECT
+    *
+    FROM
+    t_customer WHERE 1=1
+    <if test="companyId != null" >
+       AND company_id = #{companyId}
+    </if>
+
+    <if test="phoneNo != null" >
+      AND phone_no = #{phoneNo}
+    </if>
+
+    <if test="password != null" >
+      AND password = #{password}
+    </if>
+
+
+  </select>
+
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    t_customer WHERE phone_no = #{phoneNo}
+  </select>
+  <update id="updatePassword" >
+    UPDATE t_customer SET password=#{newPassword} WHERE phone_no=#{phoneNo}
+     AND password=#{oldPassword}
+  </update>
+
+  <update id="updateByPrimaryKeySelective">
+
+  </update>
+
+  <update id="updateByPhone">
+
+  </update>
+
+  <insert id="insert" parameterType="com.yongjun.stock.entity.Customer" >
+    insert into t_customer (id, company_id, phone_no,
+    password, trade_password, nickname,
+    name, sex, age, birthday,
+    headimg_url, card_number, status,
+    reg_date, active_date, authed_date,
+    last_login_time, device_id, phone_model,
+    is_black, agent_id, sub_agent_id,
+    money_total, money_frozen, money_usable,
+    money_recharge, money_withdraw, is_open,
+    notice_switch, create_time, update_time
+    )
+    values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{phoneNo,jdbcType=VARCHAR},
+    #{password,jdbcType=CHAR}, #{tradePassword,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{birthday,jdbcType=DATE},
+    #{headimgUrl,jdbcType=VARCHAR}, #{cardNumber,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+    #{regDate,jdbcType=TIMESTAMP}, #{activeDate,jdbcType=TIMESTAMP}, #{authedDate,jdbcType=TIMESTAMP},
+    #{lastLoginTime,jdbcType=TIMESTAMP}, #{deviceId,jdbcType=VARCHAR}, #{phoneModel,jdbcType=VARCHAR},
+    #{isBlack,jdbcType=TINYINT}, #{agentId,jdbcType=BIGINT}, #{subAgentId,jdbcType=BIGINT},
+    #{moneyTotal,jdbcType=DECIMAL}, #{moneyFrozen,jdbcType=DECIMAL}, #{moneyUsable,jdbcType=DECIMAL},
+    #{moneyRecharge,jdbcType=DECIMAL}, #{moneyWithdraw,jdbcType=DECIMAL}, #{isOpen,jdbcType=TINYINT},
+    #{noticeSwitch,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
+</mapper>

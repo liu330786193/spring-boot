@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.VersionDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.Version" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_name" property="appName" jdbcType="VARCHAR" />
+    <result column="app_os" property="appOs" jdbcType="VARCHAR" />
+    <result column="app_version" property="appVersion" jdbcType="VARCHAR" />
+    <result column="must_flag" property="mustFlag" jdbcType="INTEGER" />
+    <result column="issure_time" property="issureTime" jdbcType="TIMESTAMP" />
+    <result column="issure_note" property="issureNote" jdbcType="VARCHAR" />
+    <result column="issure_url" property="issureUrl" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, app_name, app_os, app_version, must_flag, issure_time, issure_note, issure_url, 
+    filename
+  </sql>
+  <select id="selectVersion" resultType="java.util.Map" >
+    <![CDATA[
+    select a.app_version appVersion,
+    (case when STRCMP(a.app_version,#{appVersion})<1 then 0 when STRCMP(a.app_version,#{appVersion})=1 and must_flag=0 then 1 else 2 end) needUpdate,
+    a.issure_note updateNote,a.issure_url updateUrl from t_version a
+    where a.app_name=#{appName} and a.app_os=#{appOs}
+    ]]>
+  </select>
+</mapper>

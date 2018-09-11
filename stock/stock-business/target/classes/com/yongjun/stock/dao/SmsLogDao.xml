@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.SmsLogDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.SmsLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="msg_type" property="msgType" jdbcType="INTEGER" />
+    <result column="verif_code" property="verifCode" jdbcType="VARCHAR" />
+    <result column="msg_channel" property="msgChannel" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="err_msg" property="errMsg" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="sucess_time" property="sucessTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_id, phone_no, msg_type, verif_code, msg_channel, status, err_msg, create_time, 
+    sucess_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sms_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_sms_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yongjun.stock.entity.SmsLog" >
+    insert into t_sms_log (id, company_id, phone_no, 
+      msg_type, verif_code, msg_channel, 
+      status, err_msg, create_time, 
+      sucess_time)
+    values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{phoneNo,jdbcType=VARCHAR}, 
+      #{msgType,jdbcType=INTEGER}, #{verifCode,jdbcType=VARCHAR}, #{msgChannel,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{errMsg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{sucessTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yongjun.stock.entity.SmsLog" >
+    insert into t_sms_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="phoneNo != null" >
+        phone_no,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+      <if test="verifCode != null" >
+        verif_code,
+      </if>
+      <if test="msgChannel != null" >
+        msg_channel,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="errMsg != null" >
+        err_msg,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="sucessTime != null" >
+        sucess_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="verifCode != null" >
+        #{verifCode,jdbcType=VARCHAR},
+      </if>
+      <if test="msgChannel != null" >
+        #{msgChannel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errMsg != null" >
+        #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sucessTime != null" >
+        #{sucessTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yongjun.stock.entity.SmsLog" >
+    update t_sms_log
+    <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNo != null" >
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null" >
+        msg_type = #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="verifCode != null" >
+        verif_code = #{verifCode,jdbcType=VARCHAR},
+      </if>
+      <if test="msgChannel != null" >
+        msg_channel = #{msgChannel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errMsg != null" >
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sucessTime != null" >
+        sucess_time = #{sucessTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yongjun.stock.entity.SmsLog" >
+    update t_sms_log
+    set company_id = #{companyId,jdbcType=BIGINT},
+      phone_no = #{phoneNo,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      verif_code = #{verifCode,jdbcType=VARCHAR},
+      msg_channel = #{msgChannel,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      sucess_time = #{sucessTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

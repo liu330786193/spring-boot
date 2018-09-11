@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongjun.stock.dao.ActivityDao">
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.Activity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="link_url" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="app_url" jdbcType="VARCHAR" property="appUrl" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_user_id" jdbcType="BIGINT" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="is_used" jdbcType="INTEGER" property="isUsed" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_id, title, begin_time, end_time, image_url, link_url, app_url, status, 
+    remark, create_user_id, create_time, modify_user_id, modify_time, is_used
+  </sql>
+  <select id="selectByCompanyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <![CDATA[
+    select 
+    <include refid="Base_Column_List" />
+    from t_activity
+    where company_id = #{companyId} AND status=1 and is_used=1
+    AND begin_time<now() and end_time>now()
+    ]]>
+  </select>
+</mapper>

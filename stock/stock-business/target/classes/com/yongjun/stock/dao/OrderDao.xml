@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.OrderDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="trade_number" property="tradeNumber" jdbcType="INTEGER" />
+    <result column="trade_money" property="tradeMoney" jdbcType="DECIMAL" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="money_back" property="moneyBack" jdbcType="DECIMAL" />
+    <result column="investor_id" property="investorId" jdbcType="BIGINT" />
+    <result column="buy_price" property="buyPrice" jdbcType="DECIMAL" />
+    <result column="buy_price_fact" property="buyPriceFact" jdbcType="DECIMAL" />
+    <result column="sell_price" property="sellPrice" jdbcType="DECIMAL" />
+    <result column="sell_price_fact" property="sellPriceFact" jdbcType="DECIMAL" />
+    <result column="stop_price" property="stopPrice" jdbcType="DECIMAL" />
+    <result column="target_price" property="targetPrice" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="order_buy_time" property="orderBuyTime" jdbcType="TIMESTAMP" />
+    <result column="real_buy_time" property="realBuyTime" jdbcType="TIMESTAMP" />
+    <result column="order_sell_time" property="orderSellTime" jdbcType="TIMESTAMP" />
+    <result column="real_sell_time" property="realSellTime" jdbcType="TIMESTAMP" />
+    <result column="cancel_time" property="cancelTime" jdbcType="TIMESTAMP" />
+    <result column="settle_time" property="settleTime" jdbcType="TIMESTAMP" />
+    <result column="hold_end_time" property="holdEndTime" jdbcType="TIMESTAMP" />
+    <result column="buy_type" property="buyType" jdbcType="INTEGER" />
+    <result column="sell_type" property="sellType" jdbcType="INTEGER" />
+    <result column="trade_profit" property="tradeProfit" jdbcType="DECIMAL" />
+    <result column="trade_profit_investor" property="tradeProfitInvestor" jdbcType="DECIMAL" />
+    <result column="poundage_total" property="poundageTotal" jdbcType="DECIMAL" />
+    <result column="poundage_buy" property="poundageBuy" jdbcType="DECIMAL" />
+    <result column="transfer_fee" property="transferFee" jdbcType="DECIMAL" />
+    <result column="delay_money" property="delayMoney" jdbcType="DECIMAL" />
+    <result column="poundage_sell" property="poundageSell" jdbcType="DECIMAL" />
+    <result column="stamp_duty" property="stampDuty" jdbcType="DECIMAL" />
+    <result column="auto_delay" property="autoDelay" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="handbuy_id" property="handbuyId" jdbcType="BIGINT" />
+    <result column="handsell_id" property="handsellId" jdbcType="BIGINT" />
+    <result column="handcancel_id" property="handcancelId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_no, company_id, customer_id, stock_code, stock_name, order_type, trade_number, 
+    trade_money, money, money_back, investor_id, buy_price, buy_price_fact, sell_price, 
+    sell_price_fact, stop_price, target_price, create_time, order_buy_time, real_buy_time, 
+    order_sell_time, real_sell_time, cancel_time, settle_time, hold_end_time, buy_type, 
+    sell_type, trade_profit, trade_profit_investor, poundage_total, poundage_buy, transfer_fee, 
+    delay_money, poundage_sell, stamp_duty, auto_delay, order_status, handbuy_id, handsell_id, 
+    handcancel_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yongjun.stock.entity.Order" >
+    insert into t_order (id, order_no, company_id, 
+      customer_id, stock_code, stock_name, 
+      order_type, trade_number, trade_money, 
+      money, money_back, investor_id, 
+      buy_price, buy_price_fact, sell_price, 
+      sell_price_fact, stop_price, target_price, 
+      create_time, order_buy_time, real_buy_time, 
+      order_sell_time, real_sell_time, cancel_time, 
+      settle_time, hold_end_time, buy_type, 
+      sell_type, trade_profit, trade_profit_investor, 
+      poundage_total, poundage_buy, transfer_fee, 
+      delay_money, poundage_sell, stamp_duty, 
+      auto_delay, order_status, handbuy_id, 
+      handsell_id, handcancel_id)
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{customerId,jdbcType=BIGINT}, #{stockCode,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=INTEGER}, #{tradeNumber,jdbcType=INTEGER}, #{tradeMoney,jdbcType=DECIMAL}, 
+      #{money,jdbcType=DECIMAL}, #{moneyBack,jdbcType=DECIMAL}, #{investorId,jdbcType=BIGINT}, 
+      #{buyPrice,jdbcType=DECIMAL}, #{buyPriceFact,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, 
+      #{sellPriceFact,jdbcType=DECIMAL}, #{stopPrice,jdbcType=DECIMAL}, #{targetPrice,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{orderBuyTime,jdbcType=TIMESTAMP}, #{realBuyTime,jdbcType=TIMESTAMP}, 
+      #{orderSellTime,jdbcType=TIMESTAMP}, #{realSellTime,jdbcType=TIMESTAMP}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{settleTime,jdbcType=TIMESTAMP}, #{holdEndTime,jdbcType=TIMESTAMP}, #{buyType,jdbcType=INTEGER}, 
+      #{sellType,jdbcType=INTEGER}, #{tradeProfit,jdbcType=DECIMAL}, #{tradeProfitInvestor,jdbcType=DECIMAL}, 
+      #{poundageTotal,jdbcType=DECIMAL}, #{poundageBuy,jdbcType=DECIMAL}, #{transferFee,jdbcType=DECIMAL}, 
+      #{delayMoney,jdbcType=DECIMAL}, #{poundageSell,jdbcType=DECIMAL}, #{stampDuty,jdbcType=DECIMAL}, 
+      #{autoDelay,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, #{handbuyId,jdbcType=BIGINT}, 
+      #{handsellId,jdbcType=BIGINT}, #{handcancelId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yongjun.stock.entity.Order" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="stockCode != null" >
+        stock_code,
+      </if>
+      <if test="stockName != null" >
+        stock_name,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="tradeNumber != null" >
+        trade_number,
+      </if>
+      <if test="tradeMoney != null" >
+        trade_money,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="moneyBack != null" >
+        money_back,
+      </if>
+      <if test="investorId != null" >
+        investor_id,
+      </if>
+      <if test="buyPrice != null" >
+        buy_price,
+      </if>
+      <if test="buyPriceFact != null" >
+        buy_price_fact,
+      </if>
+      <if test="sellPrice != null" >
+        sell_price,
+      </if>
+      <if test="sellPriceFact != null" >
+        sell_price_fact,
+      </if>
+      <if test="stopPrice != null" >
+        stop_price,
+      </if>
+      <if test="targetPrice != null" >
+        target_price,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="orderBuyTime != null" >
+        order_buy_time,
+      </if>
+      <if test="realBuyTime != null" >
+        real_buy_time,
+      </if>
+      <if test="orderSellTime != null" >
+        order_sell_time,
+      </if>
+      <if test="realSellTime != null" >
+        real_sell_time,
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time,
+      </if>
+      <if test="settleTime != null" >
+        settle_time,
+      </if>
+      <if test="holdEndTime != null" >
+        hold_end_time,
+      </if>
+      <if test="buyType != null" >
+        buy_type,
+      </if>
+      <if test="sellType != null" >
+        sell_type,
+      </if>
+      <if test="tradeProfit != null" >
+        trade_profit,
+      </if>
+      <if test="tradeProfitInvestor != null" >
+        trade_profit_investor,
+      </if>
+      <if test="poundageTotal != null" >
+        poundage_total,
+      </if>
+      <if test="poundageBuy != null" >
+        poundage_buy,
+      </if>
+      <if test="transferFee != null" >
+        transfer_fee,
+      </if>
+      <if test="delayMoney != null" >
+        delay_money,
+      </if>
+      <if test="poundageSell != null" >
+        poundage_sell,
+      </if>
+      <if test="stampDuty != null" >
+        stamp_duty,
+      </if>
+      <if test="autoDelay != null" >
+        auto_delay,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="handbuyId != null" >
+        handbuy_id,
+      </if>
+      <if test="handsellId != null" >
+        handsell_id,
+      </if>
+      <if test="handcancelId != null" >
+        handcancel_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNumber != null" >
+        #{tradeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="tradeMoney != null" >
+        #{tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="moneyBack != null" >
+        #{moneyBack,jdbcType=DECIMAL},
+      </if>
+      <if test="investorId != null" >
+        #{investorId,jdbcType=BIGINT},
+      </if>
+      <if test="buyPrice != null" >
+        #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyPriceFact != null" >
+        #{buyPriceFact,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null" >
+        #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPriceFact != null" >
+        #{sellPriceFact,jdbcType=DECIMAL},
+      </if>
+      <if test="stopPrice != null" >
+        #{stopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="targetPrice != null" >
+        #{targetPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderBuyTime != null" >
+        #{orderBuyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realBuyTime != null" >
+        #{realBuyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderSellTime != null" >
+        #{orderSellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realSellTime != null" >
+        #{realSellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelTime != null" >
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleTime != null" >
+        #{settleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holdEndTime != null" >
+        #{holdEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyType != null" >
+        #{buyType,jdbcType=INTEGER},
+      </if>
+      <if test="sellType != null" >
+        #{sellType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeProfit != null" >
+        #{tradeProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeProfitInvestor != null" >
+        #{tradeProfitInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageTotal != null" >
+        #{poundageTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageBuy != null" >
+        #{poundageBuy,jdbcType=DECIMAL},
+      </if>
+      <if test="transferFee != null" >
+        #{transferFee,jdbcType=DECIMAL},
+      </if>
+      <if test="delayMoney != null" >
+        #{delayMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageSell != null" >
+        #{poundageSell,jdbcType=DECIMAL},
+      </if>
+      <if test="stampDuty != null" >
+        #{stampDuty,jdbcType=DECIMAL},
+      </if>
+      <if test="autoDelay != null" >
+        #{autoDelay,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="handbuyId != null" >
+        #{handbuyId,jdbcType=BIGINT},
+      </if>
+      <if test="handsellId != null" >
+        #{handsellId,jdbcType=BIGINT},
+      </if>
+      <if test="handcancelId != null" >
+        #{handcancelId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yongjun.stock.entity.Order" >
+    update t_order
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stockName != null" >
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNumber != null" >
+        trade_number = #{tradeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="tradeMoney != null" >
+        trade_money = #{tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="moneyBack != null" >
+        money_back = #{moneyBack,jdbcType=DECIMAL},
+      </if>
+      <if test="investorId != null" >
+        investor_id = #{investorId,jdbcType=BIGINT},
+      </if>
+      <if test="buyPrice != null" >
+        buy_price = #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyPriceFact != null" >
+        buy_price_fact = #{buyPriceFact,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null" >
+        sell_price = #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPriceFact != null" >
+        sell_price_fact = #{sellPriceFact,jdbcType=DECIMAL},
+      </if>
+      <if test="stopPrice != null" >
+        stop_price = #{stopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="targetPrice != null" >
+        target_price = #{targetPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderBuyTime != null" >
+        order_buy_time = #{orderBuyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realBuyTime != null" >
+        real_buy_time = #{realBuyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderSellTime != null" >
+        order_sell_time = #{orderSellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realSellTime != null" >
+        real_sell_time = #{realSellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleTime != null" >
+        settle_time = #{settleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holdEndTime != null" >
+        hold_end_time = #{holdEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyType != null" >
+        buy_type = #{buyType,jdbcType=INTEGER},
+      </if>
+      <if test="sellType != null" >
+        sell_type = #{sellType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeProfit != null" >
+        trade_profit = #{tradeProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeProfitInvestor != null" >
+        trade_profit_investor = #{tradeProfitInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageTotal != null" >
+        poundage_total = #{poundageTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageBuy != null" >
+        poundage_buy = #{poundageBuy,jdbcType=DECIMAL},
+      </if>
+      <if test="transferFee != null" >
+        transfer_fee = #{transferFee,jdbcType=DECIMAL},
+      </if>
+      <if test="delayMoney != null" >
+        delay_money = #{delayMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageSell != null" >
+        poundage_sell = #{poundageSell,jdbcType=DECIMAL},
+      </if>
+      <if test="stampDuty != null" >
+        stamp_duty = #{stampDuty,jdbcType=DECIMAL},
+      </if>
+      <if test="autoDelay != null" >
+        auto_delay = #{autoDelay,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="handbuyId != null" >
+        handbuy_id = #{handbuyId,jdbcType=BIGINT},
+      </if>
+      <if test="handsellId != null" >
+        handsell_id = #{handsellId,jdbcType=BIGINT},
+      </if>
+      <if test="handcancelId != null" >
+        handcancel_id = #{handcancelId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yongjun.stock.entity.Order" >
+    update t_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      stock_name = #{stockName,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
+      trade_number = #{tradeNumber,jdbcType=INTEGER},
+      trade_money = #{tradeMoney,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL},
+      money_back = #{moneyBack,jdbcType=DECIMAL},
+      investor_id = #{investorId,jdbcType=BIGINT},
+      buy_price = #{buyPrice,jdbcType=DECIMAL},
+      buy_price_fact = #{buyPriceFact,jdbcType=DECIMAL},
+      sell_price = #{sellPrice,jdbcType=DECIMAL},
+      sell_price_fact = #{sellPriceFact,jdbcType=DECIMAL},
+      stop_price = #{stopPrice,jdbcType=DECIMAL},
+      target_price = #{targetPrice,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_buy_time = #{orderBuyTime,jdbcType=TIMESTAMP},
+      real_buy_time = #{realBuyTime,jdbcType=TIMESTAMP},
+      order_sell_time = #{orderSellTime,jdbcType=TIMESTAMP},
+      real_sell_time = #{realSellTime,jdbcType=TIMESTAMP},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      settle_time = #{settleTime,jdbcType=TIMESTAMP},
+      hold_end_time = #{holdEndTime,jdbcType=TIMESTAMP},
+      buy_type = #{buyType,jdbcType=INTEGER},
+      sell_type = #{sellType,jdbcType=INTEGER},
+      trade_profit = #{tradeProfit,jdbcType=DECIMAL},
+      trade_profit_investor = #{tradeProfitInvestor,jdbcType=DECIMAL},
+      poundage_total = #{poundageTotal,jdbcType=DECIMAL},
+      poundage_buy = #{poundageBuy,jdbcType=DECIMAL},
+      transfer_fee = #{transferFee,jdbcType=DECIMAL},
+      delay_money = #{delayMoney,jdbcType=DECIMAL},
+      poundage_sell = #{poundageSell,jdbcType=DECIMAL},
+      stamp_duty = #{stampDuty,jdbcType=DECIMAL},
+      auto_delay = #{autoDelay,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      handbuy_id = #{handbuyId,jdbcType=BIGINT},
+      handsell_id = #{handsellId,jdbcType=BIGINT},
+      handcancel_id = #{handcancelId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yongjun.stock.entity.Order" >
+    select
+    <include refid="Base_Column_List" />
+    from t_order
+    where 1=1
+    <if test="orderNo != null" >
+       AND order_no = #{orderNo}
+    </if>
+
+    <if test="customerId != null" >
+      AND customer_id = #{customerId}
+    </if>
+
+    <if test="orderType != null" >
+      AND order_type = #{orderType}
+    </if>
+
+    <if test="orderStatus != null" >
+      AND order_status = #{orderStatus}
+    </if>
+  </select>
+</mapper>

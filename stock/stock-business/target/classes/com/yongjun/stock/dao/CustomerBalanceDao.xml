@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yongjun.stock.dao.CustomerBalanceDao" >
+  <resultMap id="BaseResultMap" type="com.yongjun.stock.entity.CustomerBalance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="card_number" property="cardNumber" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="audit_id" property="auditId" jdbcType="BIGINT" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="audit_remark" property="auditRemark" jdbcType="VARCHAR" />
+    <result column="trans_time" property="transTime" jdbcType="TIMESTAMP" />
+    <result column="trans_status" property="transStatus" jdbcType="INTEGER" />
+    <result column="is_hand" property="isHand" jdbcType="INTEGER" />
+    <result column="oper_user_id" property="operUserId" jdbcType="BIGINT" />
+    <result column="oper_img" property="operImg" jdbcType="VARCHAR" />
+    <result column="oper_time" property="operTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_id, customer_id, bank_name, card_number, type, money, submit_time, audit_time, 
+    audit_id, audit_status, audit_remark, trans_time, trans_status, is_hand, oper_user_id, 
+    oper_img, oper_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_balance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_customer_balance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yongjun.stock.entity.CustomerBalance" >
+    insert into t_customer_balance (id, company_id, customer_id, 
+      bank_name, card_number, type, 
+      money, submit_time, audit_time, 
+      audit_id, audit_status, audit_remark, 
+      trans_time, trans_status, is_hand, 
+      oper_user_id, oper_img, oper_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, 
+      #{bankName,jdbcType=VARCHAR}, #{cardNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{money,jdbcType=DECIMAL}, #{submitTime,jdbcType=TIMESTAMP}, #{auditTime,jdbcType=TIMESTAMP}, 
+      #{auditId,jdbcType=BIGINT}, #{auditStatus,jdbcType=INTEGER}, #{auditRemark,jdbcType=VARCHAR}, 
+      #{transTime,jdbcType=TIMESTAMP}, #{transStatus,jdbcType=INTEGER}, #{isHand,jdbcType=INTEGER}, 
+      #{operUserId,jdbcType=BIGINT}, #{operImg,jdbcType=VARCHAR}, #{operTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yongjun.stock.entity.CustomerBalance" >
+    insert into t_customer_balance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="cardNumber != null" >
+        card_number,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="auditId != null" >
+        audit_id,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="auditRemark != null" >
+        audit_remark,
+      </if>
+      <if test="transTime != null" >
+        trans_time,
+      </if>
+      <if test="transStatus != null" >
+        trans_status,
+      </if>
+      <if test="isHand != null" >
+        is_hand,
+      </if>
+      <if test="operUserId != null" >
+        oper_user_id,
+      </if>
+      <if test="operImg != null" >
+        oper_img,
+      </if>
+      <if test="operTime != null" >
+        oper_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumber != null" >
+        #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditId != null" >
+        #{auditId,jdbcType=BIGINT},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditRemark != null" >
+        #{auditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="transTime != null" >
+        #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transStatus != null" >
+        #{transStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isHand != null" >
+        #{isHand,jdbcType=INTEGER},
+      </if>
+      <if test="operUserId != null" >
+        #{operUserId,jdbcType=BIGINT},
+      </if>
+      <if test="operImg != null" >
+        #{operImg,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        #{operTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yongjun.stock.entity.CustomerBalance" >
+    update t_customer_balance
+    <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumber != null" >
+        card_number = #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditId != null" >
+        audit_id = #{auditId,jdbcType=BIGINT},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditRemark != null" >
+        audit_remark = #{auditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="transTime != null" >
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transStatus != null" >
+        trans_status = #{transStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isHand != null" >
+        is_hand = #{isHand,jdbcType=INTEGER},
+      </if>
+      <if test="operUserId != null" >
+        oper_user_id = #{operUserId,jdbcType=BIGINT},
+      </if>
+      <if test="operImg != null" >
+        oper_img = #{operImg,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        oper_time = #{operTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yongjun.stock.entity.CustomerBalance" >
+    update t_customer_balance
+    set company_id = #{companyId,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      card_number = #{cardNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      audit_id = #{auditId,jdbcType=BIGINT},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      audit_remark = #{auditRemark,jdbcType=VARCHAR},
+      trans_time = #{transTime,jdbcType=TIMESTAMP},
+      trans_status = #{transStatus,jdbcType=INTEGER},
+      is_hand = #{isHand,jdbcType=INTEGER},
+      oper_user_id = #{operUserId,jdbcType=BIGINT},
+      oper_img = #{operImg,jdbcType=VARCHAR},
+      oper_time = #{operTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
